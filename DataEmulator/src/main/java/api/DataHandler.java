@@ -53,7 +53,7 @@ public class DataHandler {
     public DataHandler() throws ExecutionException, InterruptedException {
         ExecutorService executor = Executors.newFixedThreadPool(5); // Pool of 3 threads
 
-        Callable<String> task1 = () -> fetchData("https://api.openf1.org/v1/car_data?driver_number=40&meeting_key=1219");
+        Callable<String> task1 = () -> fetchData("https://api.openf1.org/v1/car_data?driver_number=40&meeting_key=1219&speed>0");
         Callable<String> task2 = () -> fetchData("https://api.openf1.org/v1/pit?meeting_key=1219&driver_number=40");
         Callable<String> task3 = () -> fetchData("https://api.openf1.org/v1/position?meeting_key=1219&driver_number=40");
         Callable<String> task4 = () -> fetchData("https://api.openf1.org/v1/race_control?meeting_key=1219");
