@@ -23,5 +23,6 @@ public class Main {
             System.err.println("Couldn't connect to the server");
             e.printStackTrace();
         }
+
     }
 }
