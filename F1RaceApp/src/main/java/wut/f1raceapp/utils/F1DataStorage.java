@@ -19,6 +19,7 @@ public class F1DataStorage {
     private List<RaceControlData> raceControlList = new ArrayList<>();
     private int faultyDataCounter = 0;
     private Lock lock = new ReentrantLock();
+    private List<FlagObserver> flagObservers = new ArrayList<>();
 
     public void addData(DriverData data) {
         lock.lock();
@@ -48,6 +49,10 @@ public class F1DataStorage {
     }
 
     public void addRaceControl(RaceControlData data) {
+        for (FlagObserver observer : flagObservers) {
+            observer.updateFlag(data);
+        }
+
         lock.lock();
         try {
             raceControlList.add(data);
@@ -114,6 +119,10 @@ public class F1DataStorage {
 
     public void incrementFaultyDataCounter() {
         faultyDataCounter++;
+    }
+
+    public void registerFlagObserver(FlagObserver observer) {
+        flagObservers.add(observer);
     }
 }
 

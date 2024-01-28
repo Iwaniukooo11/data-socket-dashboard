@@ -39,6 +39,7 @@ public class SocketClient extends Thread {
             while ((serverResponse = reader.readLine()) != null && isRunning) {
                 processAndAddData(serverResponse);
             }
+            this.isRunning = false;
         }
         catch (IOException e) {
             System.err.println("Couldn't connect to the server");
@@ -71,8 +72,6 @@ public class SocketClient extends Thread {
                 DriverData driverData = F1DataProcessor.parseJson(jsonData);
                 if (driverData != null) {
                     dataStorage.addData(driverData);
-                    //System.out.println("Date and time: " + driverData.getDate());
-                    //System.out.println("Gear: " + driverData.getnGear());
                 }
             }
             else if ("weather".equals(type)) {
@@ -117,6 +116,10 @@ public class SocketClient extends Thread {
             System.err.println("Couldn't parse JSON");
             e.printStackTrace();
         }
+    }
+
+    public boolean isRunning() {
+        return isRunning;
     }
 }
 

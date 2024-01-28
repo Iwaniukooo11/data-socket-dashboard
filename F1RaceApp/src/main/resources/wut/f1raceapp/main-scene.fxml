@@ -6,6 +6,7 @@
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -24,7 +25,7 @@
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Label prefHeight="26.0" prefWidth="338.0" text="Racing data analysis for the driver">
+            <Label prefHeight="26.0" prefWidth="338.0" text="Racing data analysis for Liam Lawson">
                <HBox.margin>
                   <Insets left="30.0" />
                </HBox.margin>
@@ -42,12 +43,27 @@
    <left>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" prefHeight="20.0" prefWidth="321.0" text="Wybrór zawodnika">
+            <Label alignment="CENTER" prefHeight="20.0" prefWidth="321.0" text="Driver choice">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <StackPane prefHeight="150.0" prefWidth="200.0" />
+            <Button fx:id="weatherButton" mnemonicParsing="false" onAction="#switchToWeather" text="Weather info">
+               <VBox.margin>
+                  <Insets bottom="20.0" top="20.0" />
+               </VBox.margin>
+            </Button>
+            <Region prefHeight="236.0" prefWidth="200.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="199.0" text="Aggregation method">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="comboBoxAggregation" prefWidth="150.0">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </ComboBox>
          </children></VBox>
    </left>
    <bottom>
@@ -67,19 +83,40 @@
                      <padding>
                         <Insets bottom="10.0" />
                      </padding>
+                     <StackPane.margin>
+                        <Insets top="15.0" />
+                     </StackPane.margin>
                   </Tile>
                </children>
             </StackPane>
-            <TableView prefWidth="550.0" HBox.hgrow="ALWAYS">
+            <TableView fx:id="table" prefWidth="550.0" HBox.hgrow="ALWAYS">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="rpm" prefWidth="75.0" text="RPM" />
+                <TableColumn fx:id="speed" prefWidth="75.0" text="Speed" />
+                  <TableColumn fx:id="throttle" prefWidth="75.0" text="Throttle" />
+                  <TableColumn fx:id="brakes" prefWidth="75.0" text="Brakes" />
+                  <TableColumn fx:id="ngear" prefWidth="106.0" text="Gear number" />
               </columns>
                <HBox.margin>
-                  <Insets bottom="10.0" left="30.0" right="10.0" />
+                  <Insets bottom="10.0" left="30.0" right="20.0" />
                </HBox.margin>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
             </TableView>
-            <MediaView fx:id="flagVideo" fitHeight="200.0" fitWidth="250.0" />
+            <StackPane>
+               <children>
+                  <MediaView fx:id="flagVideo" fitHeight="200.0" fitWidth="240.0" />
+                  <Label fx:id="noFlagLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="250.0" text="Currently no flag for this player">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets bottom="10.0" right="10.0" />
+               </HBox.margin>
+            </StackPane>
          </children></HBox>
    </bottom>
    <center>

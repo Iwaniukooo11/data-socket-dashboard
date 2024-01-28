@@ -22,7 +22,9 @@ public class RaceApp extends Application {
         scene.getStylesheets().add(RaceApp.class.getResource("styles/main-styles.css").toExternalForm());
 
         RaceController rcontroller = fxmlLoader.getController();
-        rcontroller.setDataStorage(dataStorage);
+        rcontroller.setDataStorage(dataStorage); // rcontroller korzysta z dataStorage do pobierania danych
+        rcontroller.setMainScene(scene);
+        dataStorage.registerFlagObserver(rcontroller); // dataStorage powiadamia rcontroller o aktualizacji flagi
 
         socketClient.start();
 
