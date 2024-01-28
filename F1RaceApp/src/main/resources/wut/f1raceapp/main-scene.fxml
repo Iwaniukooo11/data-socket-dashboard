@@ -25,7 +25,8 @@
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Label prefHeight="26.0" prefWidth="338.0" text="Racing data analysis for Liam Lawson">
+             <Button fx:id="saveButton" text="Save" onAction="#saveData"/>
+             <Label prefHeight="26.0" prefWidth="338.0" text="Racing data analysis for Liam Lawson">
                <HBox.margin>
                   <Insets left="30.0" />
                </HBox.margin>
@@ -128,20 +129,21 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <LineChart fx:id="rpmLineChart">
-              <xAxis>
-                <CategoryAxis side="BOTTOM" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis side="LEFT" />
-              </yAxis>
-               <padding>
-                  <Insets left="10.0" />
-               </padding>
-               <GridPane.margin>
-                  <Insets right="10.0" />
-               </GridPane.margin>
-            </LineChart>
+             <LineChart fx:id="rpmLineChart">
+                 <xAxis>
+                     <CategoryAxis fx:id="xAxis" side="BOTTOM" />
+                 </xAxis>
+                 <yAxis>
+                     <NumberAxis fx:id="yAxis" side="LEFT" />
+                 </yAxis>
+                 <padding>
+                     <Insets left="10.0" />
+                 </padding>
+                 <GridPane.margin>
+                     <Insets right="10.0" />
+                 </GridPane.margin>
+             </LineChart>
+
          </children>
       </GridPane>
    </center>
