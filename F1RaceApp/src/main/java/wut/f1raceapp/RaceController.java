@@ -6,8 +6,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -16,6 +19,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Stop;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.FileChooser;
 import wut.f1raceapp.dataModel.DriverData;
 import wut.f1raceapp.dataModel.PositionData;
 import wut.f1raceapp.dataModel.RaceControlData;
@@ -24,16 +28,23 @@ import wut.f1raceapp.utils.F1DataStorage;
 import eu.hansolo.tilesfx.Tile;
 import wut.f1raceapp.utils.FlagObserver;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class RaceController implements Initializable, FlagObserver {
 
+    public CategoryAxis xAxis;
+    public NumberAxis yAxis;
+    public Button saveButton;
     private F1DataStorage dataStorage;
 
     @FXML
@@ -82,19 +93,32 @@ public class RaceController implements Initializable, FlagObserver {
     public void updateChart() {
         List<DriverData> dataList = dataStorage.getDataList();
 
+        // Sort dataList by date
+        dataList.sort(Comparator.comparing(driverData -> {
+            try {
+                return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS").parse(driverData.getDate());
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return new Date(0); // default date in case of parsing failure
+            }
+        }));
+
         XYChart.Series<String, Number> rpmSeries = findRpmSeries();
         if (rpmSeries == null) {
-            // Jeśli nie, utwórz nową serię danych
             rpmSeries = new XYChart.Series<>();
             rpmLineChart.getData().add(rpmSeries);
         }
 
-        // Wyczyść poprzednie dane z serii - jeśli istniały
         rpmSeries.getData().clear();
 
-        // Dodaj nowe dane do serii
+        // Add new data to the series and hide the symbols
         for (DriverData data : dataList) {
-            rpmSeries.getData().add(new XYChart.Data<>(String.valueOf(parseDate(data.getDate())), data.getRpm()));
+            XYChart.Data<String, Number> dataPoint = new XYChart.Data<>(formatDate(parseDate(data.getDate())), data.getRpm());
+            rpmSeries.getData().add(dataPoint);
+
+            // Hide the symbol for each data point
+            Node symbol = dataPoint.getNode();
+            if (symbol != null) symbol.setStyle("-fx-background-color: transparent, transparent;");
         }
     }
 
@@ -109,7 +133,10 @@ public class RaceController implements Initializable, FlagObserver {
             return 0L; // Jeśli wystąpi błąd parsowania, zwracamy 0
         }
     }
-
+    private String formatDate(long timeInMillis) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+        return dateFormat.format(new Date(timeInMillis));
+    }
     private XYChart.Series<String, Number> findRpmSeries() {
         for (XYChart.Series<String, Number> series : rpmLineChart.getData()) {
             return series;
@@ -255,6 +282,8 @@ public class RaceController implements Initializable, FlagObserver {
     }
 
     private void initializeSpeedTile() {
+        xAxis.setLabel("Time");
+        yAxis.setLabel("RPM");
         // Ustawienie początkowych wartości dla Tile Speed
         speedTile.setSkinType(Tile.SkinType.GAUGE2);
         speedTile.setTitle("Speed");
@@ -343,6 +372,26 @@ public class RaceController implements Initializable, FlagObserver {
         ngear.setCellValueFactory(new PropertyValueFactory<RowData, Double>("ngear"));
     }
 
+    public void saveData() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Data");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+        File file = fileChooser.showSaveDialog(rpmLineChart.getScene().getWindow());
+
+        if (file != null) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                for (RowData data : table.getItems()) {
+                    String line = data.getRpm() + ", " + data.getSpeed() + ", " + data.getThrottle() + ", " + data.getBrakes() + ", " + data.getNgear();
+                    writer.write(line);
+                    writer.newLine();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                // Handle exceptions
+            }
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -420,6 +469,7 @@ public class RaceController implements Initializable, FlagObserver {
     public void setWeatherScene(Scene weatherScene) {
         this.weatherScene = weatherScene;
     }
+
 
     // Klasa lokalna reprezentująca wiersze tabeli
     public static class RowData {
