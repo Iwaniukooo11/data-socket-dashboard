@@ -37,8 +37,17 @@
    <left>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="driverButton" mnemonicParsing="false" onAction="#switchToDriver" text="Driver's info" />
-            <Region prefHeight="394.0" prefWidth="200.0" />
+            <Region prefHeight="49.0" prefWidth="200.0" />
+            <Label text="See the driver's section">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Button fx:id="driverButton" mnemonicParsing="false" onAction="#switchToDriver" text="Driver's info">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin></Button>
+            <Region prefHeight="310.0" prefWidth="200.0" />
             <Label text="Aggregation method">
                <font>
                   <Font size="16.0" />
@@ -54,8 +63,8 @@
    <center>
       <GridPane hgap="10.0" vgap="10.0" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="371.46282958984375" minWidth="10.0" prefWidth="317.5" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="310.30572509765625" minWidth="10.0" prefWidth="302.0" />
+          <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="309.5" />
+            <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="310.0" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints maxHeight="412.0" minHeight="10.0" prefHeight="218.84042358398438" vgrow="SOMETIMES" />
@@ -63,7 +72,7 @@
           <RowConstraints maxHeight="318.0" minHeight="10.0" prefHeight="202.35391235351562" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TableView fx:id="tableWeather" prefHeight="184.0" prefWidth="629.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+            <TableView fx:id="tableWeather" prefHeight="184.0" prefWidth="629.0" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
               <columns>
                 <TableColumn fx:id="track" prefWidth="136.0" text="Track temperature" />
                 <TableColumn fx:id="temperature" prefWidth="141.0" text="Air temperature" />
@@ -75,8 +84,8 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Tile fx:id="airTempTile" textSize="BIGGER" title="Air temerature" unit="°C" GridPane.columnIndex="1" />
-            <StackPane GridPane.rowIndex="1">
+            <Tile fx:id="airTempTile" textSize="BIGGER" title="Air temerature" unit="°C" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
+            <StackPane GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
                <children>
                   <Tile fx:id="windDirectionTile" textSize="BIGGER" title="Wind direction" />
                   <Gauge fx:id="windDirectionGauge" customTickLabelFontSize="22.0" needleBehavior="OPTIMIZED" needleShape="ROUND" needleType="FAT" prefHeight="197.0" prefWidth="314.0" tickLabelLocation="OUTSIDE">
@@ -119,8 +128,8 @@
                   </Gauge>
                </children>
             </StackPane>
-            <Tile fx:id="windSpeedTile" textSize="BIGGER" title="Wind speed" unit="m/s" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Tile fx:id="trackTempTile" textSize="BIGGER" title="Track temperature" unit="°C" />
+            <Tile fx:id="windSpeedTile" textSize="BIGGER" title="Wind speed" unit="m/s" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
+            <Tile fx:id="trackTempTile" textSize="BIGGER" title="Track temperature" unit="°C" GridPane.hgrow="ALWAYS" />
          </children>
          <BorderPane.margin>
             <Insets bottom="20.0" />
@@ -128,6 +137,6 @@
       </GridPane>
    </center>
    <right>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <HBox maxWidth="200.0" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </right>
 </BorderPane>

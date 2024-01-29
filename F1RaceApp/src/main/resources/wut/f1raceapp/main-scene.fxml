@@ -23,9 +23,8 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="726.0" prefWidth="1029.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wut.f1raceapp.RaceController">
    <top>
-      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="84.0" prefWidth="1029.0">
          <children>
-             <Button fx:id="saveButton" text="Save" onAction="#saveData"/>
              <Label prefHeight="26.0" prefWidth="338.0" text="Racing data analysis for Liam Lawson">
                <HBox.margin>
                   <Insets left="30.0" />
@@ -44,17 +43,26 @@
    <left>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" prefHeight="20.0" prefWidth="321.0" text="Driver choice">
+            <Region prefHeight="86.0" prefWidth="200.0" />
+            <Label text="See the weather section">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
             <Button fx:id="weatherButton" mnemonicParsing="false" onAction="#switchToWeather" text="Weather info">
                <VBox.margin>
-                  <Insets bottom="20.0" top="20.0" />
+                  <Insets bottom="30.0" top="10.0" />
                </VBox.margin>
             </Button>
-            <Region prefHeight="236.0" prefWidth="200.0" />
+            <Label text="Save current analysis state">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+             <Button fx:id="saveButton" onAction="#saveData" text="Save">
+               <VBox.margin>
+                  <Insets bottom="30.0" top="10.0" />
+               </VBox.margin></Button>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="199.0" text="Aggregation method">
                <font>
                   <Font size="16.0" />
@@ -107,7 +115,7 @@
             </TableView>
             <StackPane>
                <children>
-                  <MediaView fx:id="flagVideo" fitHeight="200.0" fitWidth="240.0" />
+                  <MediaView fx:id="flagVideo" fitHeight="200.0" fitWidth="260.0" />
                   <Label fx:id="noFlagLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="250.0" text="Currently no flag for this player">
                      <font>
                         <Font size="16.0" />
@@ -131,7 +139,7 @@
          <children>
              <LineChart fx:id="rpmLineChart">
                  <xAxis>
-                     <CategoryAxis fx:id="xAxis" side="BOTTOM" />
+                     <CategoryAxis side="BOTTOM" fx:id="xAxis" />
                  </xAxis>
                  <yAxis>
                      <NumberAxis fx:id="yAxis" side="LEFT" />
@@ -148,7 +156,7 @@
       </GridPane>
    </center>
    <right>
-      <GridPane prefHeight="453.0" prefWidth="250.0" vgap="10.0" BorderPane.alignment="CENTER">
+      <GridPane prefHeight="407.0" prefWidth="279.0" vgap="5.0" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
