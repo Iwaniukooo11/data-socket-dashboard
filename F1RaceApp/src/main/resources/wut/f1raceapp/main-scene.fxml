@@ -166,9 +166,9 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Tile fx:id="speedTile" />
-            <Tile fx:id="throttleTile" GridPane.rowIndex="1" />
-            <Tile fx:id="brakesTile" GridPane.rowIndex="2">
+            <Tile fx:id="speedTile" textSize="BIGGER" title="Speed" unit="km/h" />
+            <Tile fx:id="throttleTile" title="Throttle" unit="\%" GridPane.rowIndex="1" />
+            <Tile fx:id="brakesTile" unit="\%" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>

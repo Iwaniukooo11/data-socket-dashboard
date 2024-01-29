@@ -307,6 +307,7 @@ public class RaceController implements Initializable, FlagObserver {
     }
 
     private void initializeSpeedTile() {
+        // Ustawienie osi do wykresu
         xAxis.setLabel("Time");
         yAxis.setLabel("RPM");
         // Ustawienie początkowych wartości dla Tile Speed
@@ -405,6 +406,13 @@ public class RaceController implements Initializable, FlagObserver {
 
         if (file != null) {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                DriverData dData = dataStorage.peekLastData();
+                writer.write("Date: " + dData.getDate());
+                writer.newLine();
+                writer.write("Aggregation type: " + comboBoxAggregation.getValue());
+                writer.newLine();
+                writer.write("RPM, Speed, Throttle, Brakes, Gear");
+                writer.newLine();
                 for (RowData data : table.getItems()) {
                     String line = data.getRpm() + ", " + data.getSpeed() + ", " + data.getThrottle() + ", " + data.getBrakes() + ", " + data.getNgear();
                     writer.write(line);
