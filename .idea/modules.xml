@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/testSocket.iml" filepath="$PROJECT_DIR$/testSocket.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/zpoif.iml" filepath="$PROJECT_DIR$/.idea/zpoif.iml" />
     </modules>
   </component>
 </project>

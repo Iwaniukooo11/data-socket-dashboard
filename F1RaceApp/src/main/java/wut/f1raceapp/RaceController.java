@@ -111,8 +111,12 @@ public class RaceController implements Initializable, FlagObserver {
 
         rpmSeries.getData().clear();
 
-        // Add new data to the series and hide the symbols
-        for (DriverData data : dataList) {
+        // Determine the starting index to get the last 50 elements
+        int startIndex = Math.max(dataList.size() - 50, 0);
+
+        // Add only the last 50 new data to the series
+        for (int i = startIndex; i < dataList.size(); i++) {
+            DriverData data = dataList.get(i);
             XYChart.Data<String, Number> dataPoint = new XYChart.Data<>(formatDate(parseDate(data.getDate())), data.getRpm());
             rpmSeries.getData().add(dataPoint);
 
