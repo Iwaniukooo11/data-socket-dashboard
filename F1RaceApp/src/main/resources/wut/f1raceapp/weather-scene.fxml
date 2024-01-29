@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import eu.hansolo.medusa.Gauge?>
 <?import eu.hansolo.tilesfx.Tile?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -13,11 +14,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="726.0" prefWidth="1029.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wut.f1raceapp.RaceController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="726.0" prefWidth="1029.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wut.f1raceapp.WeatherController">
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -35,7 +37,7 @@
    <left>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="driverButton" mnemonicParsing="false" text="Driver's info" />
+            <Button fx:id="driverButton" mnemonicParsing="false" onAction="#switchToDriver" text="Driver's info" />
             <Region prefHeight="394.0" prefWidth="200.0" />
             <Label text="Aggregation method">
                <font>
@@ -63,8 +65,8 @@
          <children>
             <TableView fx:id="tableWeather" prefHeight="184.0" prefWidth="629.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
               <columns>
-                <TableColumn fx:id="rain" prefWidth="75.0" text="Rainfall" />
-                <TableColumn fx:id="temperature" prefWidth="124.41790771484375" text="Air temperature" />
+                <TableColumn fx:id="track" prefWidth="136.0" text="Track temperature" />
+                <TableColumn fx:id="temperature" prefWidth="141.0" text="Air temperature" />
                   <TableColumn fx:id="humidity" prefWidth="79.6865234375" text="Humidity" />
                   <TableColumn fx:id="pressure" prefWidth="76.33575439453125" text="Pressure" />
                   <TableColumn fx:id="wind" prefWidth="95.91033935546875" text="Wind speed" />
@@ -73,10 +75,52 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Tile fx:id="trackTempTile" />
-            <Tile fx:id="airTempTile" GridPane.columnIndex="1" />
-            <Tile fx:id="windDirectionTile" GridPane.rowIndex="1" />
-            <Tile fx:id="windSpeedTile" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Tile fx:id="airTempTile" textSize="BIGGER" title="Air temerature" unit="°C" GridPane.columnIndex="1" />
+            <StackPane GridPane.rowIndex="1">
+               <children>
+                  <Tile fx:id="windDirectionTile" textSize="BIGGER" title="Wind direction" />
+                  <Gauge fx:id="windDirectionGauge" customTickLabelFontSize="22.0" needleBehavior="OPTIMIZED" needleShape="ROUND" needleType="FAT" prefHeight="197.0" prefWidth="314.0" tickLabelLocation="OUTSIDE">
+                     <StackPane.margin>
+                        <Insets bottom="5.0" top="20.0" />
+                     </StackPane.margin>
+                     <majorTickMarkColor>
+                        <Color red="0.9490196108818054" green="0.9490196108818054" blue="0.9490196108818054" />
+                     </majorTickMarkColor>
+                     <mediumTickMarkColor>
+                        <Color red="0.9490196108818054" green="0.9490196108818054" blue="0.9490196108818054" />
+                     </mediumTickMarkColor>
+                     <minorTickMarkColor>
+                        <Color red="0.9490196108818054" green="0.9490196108818054" blue="0.9490196108818054" />
+                     </minorTickMarkColor>
+                     <subTitleColor>
+                        <Color red="0.9490196108818054" green="0.9490196108818054" blue="0.9490196108818054" />
+                     </subTitleColor>
+                     <tickLabelColor>
+                        <Color red="0.9490196108818054" green="0.9490196108818054" blue="0.9490196108818054" />
+                     </tickLabelColor>
+                     <tickMarkColor>
+                        <Color red="0.9490196108818054" green="0.9490196108818054" blue="0.9490196108818054" />
+                     </tickMarkColor>
+                     <titleColor>
+                        <Color red="0.9490196108818054" green="0.9490196108818054" blue="0.9490196108818054" />
+                     </titleColor>
+                     <unitColor>
+                        <Color red="0.9490196108818054" green="0.9490196108818054" blue="0.9490196108818054" />
+                     </unitColor>
+                     <valueColor>
+                        <Color red="0.9490196108818054" green="0.9490196108818054" blue="0.9490196108818054" />
+                     </valueColor>
+                     <zeroColor>
+                        <Color red="0.9490196108818054" green="0.9490196108818054" blue="0.9490196108818054" />
+                     </zeroColor>
+                     <needleColor>
+                        <Color green="0.4371974468231201" blue="0.7799999713897705" />
+                     </needleColor>
+                  </Gauge>
+               </children>
+            </StackPane>
+            <Tile fx:id="windSpeedTile" textSize="BIGGER" title="Wind speed" unit="m/s" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Tile fx:id="trackTempTile" textSize="BIGGER" title="Track temperature" unit="°C" />
          </children>
          <BorderPane.margin>
             <Insets bottom="20.0" />

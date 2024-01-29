@@ -7,6 +7,7 @@ module wut.f1raceapp {
     requires com.fasterxml.jackson.annotation;
     requires com.fasterxml.jackson.databind;
     requires eu.hansolo.tilesfx;
+    requires eu.hansolo.medusa;
 
 
     exports wut.f1raceapp.dataModel;
