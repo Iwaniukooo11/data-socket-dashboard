@@ -354,7 +354,7 @@ public class RaceController implements Initializable, FlagObserver {
         positionTile.setBackgroundColor(javafx.scene.paint.Color.web("#DF2C63"));
         positionTile.setMinValue(1);
         positionTile.setMaxValue(20);
-
+    //dataStorage.registerPositionObserver(positionTile);
         // Inna opcja - character
 //        positionTile.setSkinType(Tile.SkinType.CHARACTER);
 //        positionTile.setBackgroundColor(javafx.scene.paint.Color.web("#DF2C63"));
