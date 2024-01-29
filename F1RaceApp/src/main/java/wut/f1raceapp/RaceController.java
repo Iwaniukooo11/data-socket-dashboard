@@ -386,8 +386,8 @@ public class RaceController implements Initializable, FlagObserver {
                     writer.newLine();
                 }
             } catch (IOException ex) {
+                System.out.println("Couldn't save data to file");
                 ex.printStackTrace();
-                // Handle exceptions
             }
         }
     }
