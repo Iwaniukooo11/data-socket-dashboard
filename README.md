@@ -23,3 +23,10 @@ Formula-1-Dashboard is a Java application designed to provide real-time informat
 2. Navigate to the project directory: `cd Formula-1-Dashboard`
 3. To start the server app, compile and run DataEmulator/src/main/java/Main.java
 4. To open the dashbord, compile and run F1RaceApp/src/main/java/wut/f1raceapp/RaceApp.java
+
+## Dashbord
+### The driver's information view
+![data-socket-dashbord](views/driver.png)
+
+### Weather information view
+![data-socket-dashbord](views/weather.png)
