@@ -84,6 +84,8 @@ public class RaceController implements Initializable, FlagObserver {
     private TableColumn<RowData, Double> ngear;
     @FXML
     private ComboBox<String> comboBoxAggregation;
+    @FXML
+    private Label faultyLabel;
 
     private final File greenFlagFile = new File(RaceApp.class.getResource("checkedFlag.mp4").getFile());
     private final Media greenFlagMedia = new Media(greenFlagFile.toURI().toString());
@@ -283,6 +285,14 @@ public class RaceController implements Initializable, FlagObserver {
 
     }
 
+    private void updateFaultyLabel() {
+        int faultyDataCounter = dataStorage.getFaultyDataCounter();
+        if (faultyDataCounter > 0) {
+            faultyLabel.setText(String.valueOf(faultyDataCounter));
+        }  // Nie zmieniamy tekstu, jeśli nie ma błędów
+
+    }
+
     public void switchToWeather() throws IOException {
 
         if(this.weatherScene == null) {
@@ -384,7 +394,7 @@ public class RaceController implements Initializable, FlagObserver {
         positionTile.setBackgroundColor(javafx.scene.paint.Color.web("#DF2C63"));
         positionTile.setMinValue(1);
         positionTile.setMaxValue(20);
-    //dataStorage.registerPositionObserver(positionTile);
+        //dataStorage.registerPositionObserver(positionTile);
         // Inna opcja - character
 //        positionTile.setSkinType(Tile.SkinType.CHARACTER);
 //        positionTile.setBackgroundColor(javafx.scene.paint.Color.web("#DF2C63"));
@@ -452,6 +462,7 @@ public class RaceController implements Initializable, FlagObserver {
                     Platform.runLater(() -> {
                         try {
                             updateTile();
+                            updateFaultyLabel();
                         } catch (IndexOutOfBoundsException e) {
                             System.out.println("No data to update tile. Perhaps the socket client has stopped.");
                             e.printStackTrace();

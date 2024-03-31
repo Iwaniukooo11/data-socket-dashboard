@@ -70,9 +70,22 @@
             </Label>
             <ComboBox fx:id="comboBoxAggregation" prefWidth="150.0">
                <VBox.margin>
-                  <Insets top="10.0" />
+                  <Insets bottom="20.0" top="10.0" />
                </VBox.margin>
             </ComboBox>
+            <Label text="Number of faulty data">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="faultyLabel" text="0">
+               <font>
+                  <Font name="Impact" size="28.0" />
+               </font>
+            </Label>
          </children></VBox>
    </left>
    <bottom>
