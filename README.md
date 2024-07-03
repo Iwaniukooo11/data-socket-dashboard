@@ -4,10 +4,10 @@
 Formula-1-Dashboard is a Java application designed to provide real-time information and statistical analysis for a selected Formula 1 race driver. The aim of the project is to create an interactive dashboard that displays various metrics including car speed, throttle, brakes, position, flags, current weather, and temperature.
 
 ## Features
-- Real-time updates: The dashboard visualizations are updated dynamically as new data from the race becomes available.
-- Statistical calculations: The application calculates statistical values such as mean, median, and standard deviation for metrics such as speed, throttle, and brakes.
-- Web sockets: Formula-1-Dashboard utilizes web sockets for communication, enabling efficient data transmission between the server and client.
-- Integrated server app: The project includes a separate application acting as a server, which retrieves data about the race from the OpenF1 API.
+- **Real-time updates**: The dashboard visualizations are updated dynamically as new data from the race becomes available.
+- **Statistical calculations**: The application calculates statistical values such as mean, median, and standard deviation for metrics such as speed, throttle, and brakes.
+- **Web sockets**: Formula-1-Dashboard utilizes web sockets for communication, enabling efficient data transmission between the server and client.
+- **Integrated server app**: The project includes a separate application acting as a server, which retrieves data about the race from the OpenF1 API.
 
 ## Technologies Used
 - Java
@@ -34,5 +34,5 @@ Formula-1-Dashboard is a Java application designed to provide real-time informat
 </div>
 
 ## Authors
-Hubert Kowalski  
-Mateusz Iwaniuk
+- Hubert Kowalski  
+- Mateusz Iwaniuk
